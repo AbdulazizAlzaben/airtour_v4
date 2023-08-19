@@ -55,25 +55,70 @@ class _OneWaySearchState extends State<OneWaySearch> {
     return Text("${endTime - startTime}");
   }
 
-  String calculateTravelTime(Timestamp departureTime, Timestamp arrivalTime) {
-    DateTime departureDateTime = departureTime.toDate();
-    DateTime arrivalDateTime = arrivalTime.toDate();
+  // String calculateTravelTime(Timestamp departuredate, Timestamp arrivaldate,Timestamp departureTime, Timestamp arrivalTime) {
+  //   DateTime departureDateTime = departureTime.toDate();
+  //   DateTime arrivalDateTime = arrivalTime.toDate();
+
+  //   Duration travelDuration = arrivalDateTime.difference(departureDateTime);
+
+  //   int totalMinutes = travelDuration.inMinutes;
+  //   int hours = totalMinutes ~/ 60;
+  //   int minutes = totalMinutes % 60;
+
+  //   // String formattedTravelTime = hours.toString() + 'h';
+  //   if (hours < 0) {
+  //     hours = hours * -1;
+  //   }
+  //   String formattedTravelTime = hours.toString() + 'h';
+
+  //   if (minutes != 0) {
+  //     formattedTravelTime += ' ${minutes}m';
+  //   }
+
+  //   return formattedTravelTime;
+  // }
+  String calculateTravelTime(
+    Timestamp departuredate,
+    Timestamp arrivaldate,
+    Timestamp departureTime,
+    Timestamp arrivalTime,
+  ) {
+    DateTime departureDateTime = DateTime(
+      departuredate.toDate().year,
+      departuredate.toDate().month,
+      departuredate.toDate().day,
+      departureTime.toDate().hour,
+      departureTime.toDate().minute,
+    );
+
+    DateTime arrivalDateTime = DateTime(
+      arrivaldate.toDate().year,
+      arrivaldate.toDate().month,
+      arrivaldate.toDate().day,
+      arrivalTime.toDate().hour,
+      arrivalTime.toDate().minute,
+    );
+
+    if (arrivalDateTime.isBefore(departureDateTime)) {
+      arrivalDateTime = arrivalDateTime.add(Duration(days: 1));
+    }
 
     Duration travelDuration = arrivalDateTime.difference(departureDateTime);
-
     int totalMinutes = travelDuration.inMinutes;
     int hours = totalMinutes ~/ 60;
     int minutes = totalMinutes % 60;
 
-    // String formattedTravelTime = hours.toString() + 'h';
     if (hours < 0) {
       hours = hours * -1;
     }
+
     String formattedTravelTime = hours.toString() + 'h';
 
     if (minutes != 0) {
       formattedTravelTime += ' ${minutes}m';
     }
+    print("departureDateTime:$departureDateTime");
+    print("arrivalDateTime:$arrivalDateTime");
 
     return formattedTravelTime;
   }
@@ -167,7 +212,10 @@ class _OneWaySearchState extends State<OneWaySearch> {
                                               .formatTime(flight.depTime),
                                         ),
                                         Text(calculateTravelTime(
-                                            flight.depTime, flight.arrTime)),
+                                            flight.depDate,
+                                            flight.arrDate,
+                                            flight.depTime,
+                                            flight.arrTime)),
                                         Text(
                                           _flightsService
                                               .formatTime(flight.arrTime),

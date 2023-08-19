@@ -55,273 +55,300 @@ class _BoardingPassState extends State<BoardingPass> {
     return '$day/$monthName/$year';
   }
 
+  String boardingTime(Timestamp departureTime) {
+    DateTime departureDateTime = departureTime.toDate();
+    DateTime boardingDateTime =
+        departureDateTime.subtract(Duration(minutes: 30));
+
+    String formattedBoardingTime =
+        boardingDateTime.hour.toString().padLeft(2, '0') +
+            ':' +
+            boardingDateTime.minute.toString().padLeft(2, '0') +
+            ' ' +
+            (boardingDateTime.hour >= 12 ? 'PM' : 'AM');
+
+    return formattedBoardingTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        width: double.infinity,
-        margin: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-            boxShadow: const [BoxShadow(blurRadius: 2, offset: Offset(0, 0))],
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.white),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Ticket:",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      Text("Booking Reference:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ))
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.ticket.documentId),
-                      Text(widget.booking.documentId)
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 1.0,
-                    color: Colors.black,
-                    width: double.infinity,
-                    //child: SizedBox.expand(),
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Name:",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      Text("Birth Date:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ))
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${widget.ticket.firstName} ${widget.ticket.middleName} ${widget.ticket.lastName}',
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                      Text(date2(widget.ticket.birthDate))
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Boarding time:",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      ),
-                      Text(
-                        "Date:",
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(_flightsService.formatTime(widget.flight.depTime)),
-                      Text(date1(widget.flight.depDate))
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        widget.flight.fromCity,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Container(
-                        height: 30,
-                        child: Image.asset('images/flight-Icon.png'),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        widget.flight.toCity,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 1.0,
-                    color: Colors.black,
-                    width: double.infinity,
-                    //child: SizedBox.expand(),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Airport:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          )),
-                      Text("Airport:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ))
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.flight.fromAirport),
-                      Text(widget.flight.toAirport)
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Flight:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          )),
-                      Text("class:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ))
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.flight.documentId),
-                      Text(widget.ticket.ticketClass)
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Meal Type:",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          )),
-                      Row(
-                        children: [
-                          Text("Baggage quantity:",
-                              style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              )),
-                          //Text("${ticket.bagQuantity}")
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(widget.ticket.mealType),
-                      Text("${widget.ticket.bagQuantity}")
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Ticket Price: ",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          )),
-                      Text(
-                        "${widget.ticket.ticketPrice}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      )
-                    ],
-                  ),
-                  //if (asd == true)
-                  Container(
-                    width: double.infinity,
-                    height: 100,
-                    child: Image.asset('images/BarCode.jpeg'),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        appBar: AppBar(
+          title: Text("Boarding Pass"),
         ),
-      )),
-    );
+        body: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(blurRadius: 2, offset: Offset(0, 0))
+                    ],
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // const Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       "Ticket:",
+                          //       style: TextStyle(
+                          //         fontSize: 18.0,
+                          //         fontWeight: FontWeight.bold,
+                          //         color: Colors.black87,
+                          //       ),
+                          //     ),
+                          //     Text("Booking Reference:",
+                          //         style: TextStyle(
+                          //           fontSize: 18.0,
+                          //           fontWeight: FontWeight.bold,
+                          //           color: Colors.black87,
+                          //         ))
+                          //   ],
+                          // ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(widget.ticket.documentId),
+                          //     Text(widget.booking.documentId)
+                          //   ],
+                          // ),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // Container(
+                          //   height: 1.0,
+                          //   color: Colors.black,
+                          //   width: double.infinity,
+                          //   //child: SizedBox.expand(),
+                          // ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Name:",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Text("Birth Date:",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                '${widget.ticket.firstName} ${widget.ticket.middleName} ${widget.ticket.lastName}',
+                                style: const TextStyle(
+                                  fontSize: 16.0,
+                                ),
+                              ),
+                              Text(date2(widget.ticket.birthDate))
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Boarding time:",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Text(
+                                "Departure:",
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                boardingTime(widget.flight.depTime),
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text("${date1(widget.flight.depDate)}  "),
+                                  Text(
+                                    _flightsService
+                                        .formatTime(widget.flight.depTime),
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                widget.flight.fromCity,
+                                style: const TextStyle(fontSize: 24),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                height: 30,
+                                child: Image.asset('images/flight-Icon.png'),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                widget.flight.toCity,
+                                style: const TextStyle(fontSize: 24),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 1.0,
+                            color: Colors.black,
+                            width: double.infinity,
+                            //child: SizedBox.expand(),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Airport:",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  )),
+                              Text("Airport:",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.flight.fromAirport),
+                              Text(widget.flight.toAirport)
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Flight:",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  )),
+                              Text("class:",
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ))
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.flight.documentId),
+                              Text(widget.ticket.ticketClass)
+                            ],
+                          ),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
+                          // const Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text("Meal Type:",
+                          //         style: TextStyle(
+                          //           fontSize: 18.0,
+                          //           fontWeight: FontWeight.bold,
+                          //           color: Colors.black87,
+                          //         )),
+                          //     Row(
+                          //       children: [
+                          //         Text("Baggage quantity:",
+                          //             style: TextStyle(
+                          //               fontSize: 18.0,
+                          //               fontWeight: FontWeight.bold,
+                          //               color: Colors.black87,
+                          //             )),
+                          //         //Text("${ticket.bagQuantity}")
+                          //       ],
+                          //     )
+                          //   ],
+                          // ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(widget.ticket.mealType),
+                          //     Text("${widget.ticket.bagQuantity}")
+                          //   ],
+                          // ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 100,
+                            child: Image.asset('images/BarCode.jpeg'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

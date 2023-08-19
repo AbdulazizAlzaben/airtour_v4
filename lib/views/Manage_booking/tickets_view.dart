@@ -79,7 +79,7 @@ class _TicketsViewState extends State<TicketsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.blue,
         centerTitle: true,
         title: const Text(
           'List of Tickets',
@@ -192,135 +192,135 @@ class _TicketsViewState extends State<TicketsView> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Boarding time:",
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Date:",
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(_flightsService
-                                      .formatTime(widget.flight.depTime)),
-                                  Text(date1(widget.flight.depDate))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    widget.flight.fromCity,
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Container(
-                                    height: 30,
-                                    child:
-                                        Image.asset('images/flight-Icon.png'),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    widget.flight.toCity,
-                                    style: const TextStyle(fontSize: 24),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                height: 1.0,
-                                color: Colors.black,
-                                width: double.infinity,
-                                //child: SizedBox.expand(),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Airport:",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      )),
-                                  Text("Airport:",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ))
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(widget.flight.fromAirport),
-                                  Text(widget.flight.toAirport)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Flight:",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      )),
-                                  Text("class:",
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ))
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(widget.flight.documentId),
-                                  Text(ticket.ticketClass)
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              // const Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       "Boarding time:",
+                              //       style: TextStyle(
+                              //         fontSize: 18.0,
+                              //         fontWeight: FontWeight.bold,
+                              //         color: Colors.black87,
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       "Date:",
+                              //       style: TextStyle(
+                              //         fontSize: 18.0,
+                              //         fontWeight: FontWeight.bold,
+                              //         color: Colors.black87,
+                              //       ),
+                              //     )
+                              //   ],
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(_flightsService
+                              //         .formatTime(widget.flight.depTime)),
+                              //     Text(date1(widget.flight.depDate))
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(
+                              //       widget.flight.fromCity,
+                              //       style: const TextStyle(fontSize: 24),
+                              //     ),
+                              //     const SizedBox(
+                              //       width: 5,
+                              //     ),
+                              //     Container(
+                              //       height: 30,
+                              //       child:
+                              //           Image.asset('images/flight-Icon.png'),
+                              //     ),
+                              //     const SizedBox(
+                              //       width: 5,
+                              //     ),
+                              //     Text(
+                              //       widget.flight.toCity,
+                              //       style: const TextStyle(fontSize: 24),
+                              //     ),
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              // Container(
+                              //   height: 1.0,
+                              //   color: Colors.black,
+                              //   width: double.infinity,
+                              //   //child: SizedBox.expand(),
+                              // ),
+                              // const SizedBox(
+                              //   height: 10,
+                              // ),
+                              // const Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text("Airport:",
+                              //         style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black87,
+                              //         )),
+                              //     Text("Airport:",
+                              //         style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black87,
+                              //         ))
+                              //   ],
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(widget.flight.fromAirport),
+                              //     Text(widget.flight.toAirport)
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
+                              // const Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text("Flight:",
+                              //         style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black87,
+                              //         )),
+                              //     Text("class:",
+                              //         style: TextStyle(
+                              //           fontSize: 18.0,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black87,
+                              //         ))
+                              //   ],
+                              // ),
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              //     Text(widget.flight.documentId),
+                              //     Text(ticket.ticketClass)
+                              //   ],
+                              // ),
+                              // const SizedBox(
+                              //   height: 20,
+                              // ),
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -372,18 +372,12 @@ class _TicketsViewState extends State<TicketsView> {
                                   )
                                 ],
                               ),
-                              if (asd == true)
-                                Container(
-                                  width: double.infinity,
-                                  height: 100,
-                                  child: Image.asset('images/BarCode.jpeg'),
-                                ),
                             ],
                           ),
                         ),
                         GestureDetector(
                           onTap: () async {
-                            if (ticket.checkInStatus) {
+                            if (ticket.checkInStatus == false) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
